@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Evento</string>
+    <string name="preference_user_info">USER_INFO</string>
+    <string name="user_info_id">USER_INFO_ID</string>
+</resources>
