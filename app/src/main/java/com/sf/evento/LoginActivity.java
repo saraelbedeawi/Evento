@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         if(mAuth.getCurrentUser()!=null)
         {
-            //
+            // handle the already logged in user
         }
 
     }
@@ -211,5 +211,10 @@ public class LoginActivity extends AppCompatActivity {
             profile_image.setImageURI(selected_image);
 
         }
+    }
+
+    public void registerUser()
+    {
+//        if(full)
     }
 }
