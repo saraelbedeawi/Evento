@@ -2,22 +2,22 @@ package com.sf.evento;
 
 public class User
 {
-    public String username;
+    public String full_name;
     public String password;
     public  String phoneNumber;
 
-    public User(String username, String password, String phoneNumber) {
-        this.username = username;
+    public User(String full_name, String password, String phoneNumber) {
+        this.full_name = full_name;
         this.password = password;
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
     public String getPassword() {
