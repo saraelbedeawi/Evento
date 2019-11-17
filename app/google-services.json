@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "117235555402-peq55imjusvjceo45600m1egimvthhiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sf.evento",
+            "certificate_hash": "9d4ba5ff39af41e5676b13be203092f668c64d92"
+          }
+        },
+        {
           "client_id": "117235555402-sndq3ih99lsh3h0vhbn5gibmkcot23pm.apps.googleusercontent.com",
           "client_type": 3
         }

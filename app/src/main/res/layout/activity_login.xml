@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+        android:id="@+id/full_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/full_name"
+        android:layout_below="@+id/profile_image"
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:layout_below="@+id/full_name"
+        />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:inputType="number"
-        android:layout_centerVertical="true"
+        android:hint="@string/mobile_number"
+        android:layout_below="@+id/password"
         android:id="@+id/phone">
 
     </EditText>
@@ -23,5 +53,7 @@
         android:layout_margin="10dp"
         android:text="Sign Up"
         ></Button>
+
+
 
 </RelativeLayout>
