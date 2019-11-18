@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-            storeFile file('C:\\Users\\Lenovo\\AndroidStudioProjects\\Evento\\evento-debug.keystore')
+            storeFile file('D:\\Downloads\\Evento\\evento-debug.keystore')
             storePassword '1011998'
             keyAlias = 'evento-debug'
             keyPassword '1011998'
@@ -39,6 +39,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.google.android.material:material:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

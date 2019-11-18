@@ -10,8 +10,9 @@
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="212dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:src="@drawable/profile"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         />
 
@@ -20,46 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginTop="30dp"
         android:inputType="textPersonName"
         android:hint="@string/full_name"
         android:layout_below="@+id/profile_image"
         />
 
-    <EditText
-        android:id="@+id/password"
+    <Button
+        android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="@string/password"
+        android:text="@string/save"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/full_name"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="@string/mobile_number"
-        android:layout_below="@+id/password"
-        android:id="@+id/phone">
-
-    </EditText>
-
-    <Button
-        android:id="@+id/sign_up"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/phone"
-        android:layout_margin="10dp"
-        android:text="Sign Up"
-        ></Button>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        android:layout_below="@+id/sign_up"
         />
 
 

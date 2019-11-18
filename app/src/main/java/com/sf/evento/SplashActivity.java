@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent i = new Intent(SplashActivity.this, PhoneVerificationActivity.class);
                     SplashActivity.this.finish();
                     startActivity(i);
                 }
