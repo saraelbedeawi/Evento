@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="@string/mobile_number"
+        android:maxLength="11"
         android:id="@+id/phone">
 
     </EditText>

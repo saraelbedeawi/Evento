@@ -15,8 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -32,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
 
     StorageReference mStorageRef;
     public Uri selected_image;
+
+    private FirebaseUser user;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +60,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
+
+
         save_button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                fileUploader();
+                fileUploader().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            User u = new User(full_name.getText().toString(), user.getPhoneNumber(),
+                                    downloadUri.getPath(), user.getUid());
+                            u.SaveUser(db);
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
+                    }
+                });
+
+
             }
         });
 
@@ -71,15 +100,15 @@ public class LoginActivity extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
     }
 
-    private void fileUploader()
+    private Task<Uri> fileUploader()
     {
-        StorageReference Ref=mStorageRef.child(System.currentTimeMillis()+"."+ getExtension(selected_image));
-        Ref.putFile(selected_image)
+        final StorageReference ref=mStorageRef.child(System.currentTimeMillis()+"."+ getExtension(selected_image));
+        return ref.putFile(selected_image)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
-                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                       // Uri downloadUrl = taskSnapshot.getDownloadUrl();
                         Toast.makeText(LoginActivity.this,"image uploaded successfully",Toast.LENGTH_LONG).show();
                     }
                 })
@@ -90,7 +119,18 @@ public class LoginActivity extends AppCompatActivity {
                         // ...
                         Toast.makeText(LoginActivity.this,"fashal ya homar",Toast.LENGTH_LONG).show();
                     }
-                });
+                }).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                // Continue with the task to get the download URL
+                return ref.getDownloadUrl();
+            }
+        });
+
     }
 
     private void fileChooser()
