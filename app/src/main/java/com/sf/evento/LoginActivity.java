@@ -78,6 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                             User u = new User(full_name.getText().toString(), user.getPhoneNumber(),
                                     downloadUri.getPath(), user.getUid());
                             u.SaveUser(db);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                         } else {
                             // Handle failures
                             // ...

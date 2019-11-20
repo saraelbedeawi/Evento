@@ -136,18 +136,18 @@ public class CodeVerficationActivity extends AppCompatActivity {
                         if (task.isSuccessful() )
                         {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            if(user.getDisplayName()=="")
-                            {
-                                Intent intent = new Intent(CodeVerficationActivity.this, LoginActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                            }
-                            else
+                            if(user.getDisplayName()!=null)
                             {
                                 Intent intent = new Intent(CodeVerficationActivity.this, MainActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             }
+                            else
+                            { Intent intent = new Intent(CodeVerficationActivity.this, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+
+                        }
 
                             //verification successful we will start the profile activity
 

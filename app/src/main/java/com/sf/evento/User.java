@@ -61,20 +61,7 @@ public class User
 
     public void SaveUser(FirebaseFirestore db)
     {
-//        db.collection("users").document(this.id)
-//                .set(this)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Log.d(TAG, "DocumentSnapshot successfully written!");
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error writing document", e);
-//                    }
-//                });
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(this.fullName)
@@ -91,4 +78,7 @@ public class User
                 });
 
     }
+
+
+
 }

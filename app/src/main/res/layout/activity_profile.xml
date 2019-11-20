@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/yellow"
+    tools:context=".Profile">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="237dp"
+        android:layout_height="230dp"
+        android:src="@drawable/profile"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="352dp"
+        android:layout_below="@id/profile_image"
+
+        />
+
+
+    <EditText
+        android:id="@+id/full_name"
+        android:layout_width="345dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="397dp"
+        android:layout_below="@id/textView2"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile Number:"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="450dp"
+        android:layout_below="@id/full_name"/>
+
+    <EditText
+        android:id="@+id/mobile_number"
+        android:layout_width="331dp"
+        android:layout_height="58dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="phone"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="495dp"
+        android:layout_below="@id/textView3"/>
+
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="111dp"
+        android:layout_height="58dp"
+        android:text="Edit"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="615dp"
+        android:layout_below="@id/mobile_number"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="110dp"
+        android:layout_height="53dp"
+        android:text="Delete"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="630dp"
+        android:layout_below="@id/edit_button"/>
+
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:layout_below="@id/delete_button"/>
+
+</RelativeLayout>
