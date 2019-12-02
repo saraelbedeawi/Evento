@@ -6,7 +6,48 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-    android:text="add Friends fragment"
+    android:text="Search By phone Number"
         android:textSize="20dp"
         android:textStyle="bold"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone">
+
+    </EditText>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/search">
+    </Button>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileCard"
+        >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/profile_image">
+        </ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/profile_image"
+            android:id="@+id/name"
+            >
+        </TextView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/profile_image"
+            android:layout_below="@id/name"
+            android:text="ADD"
+            android:layout_marginTop="8dp"
+            android:id="@+id/add">
+
+        </Button>
+    </RelativeLayout>
 </LinearLayout>

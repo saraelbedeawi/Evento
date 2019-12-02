@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/yellow"
+
     tools:context=".Profile">
 
 
@@ -12,9 +13,11 @@
         android:id="@+id/profile_image"
         android:layout_width="237dp"
         android:layout_height="230dp"
-        android:src="@drawable/profile"
+        android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="79dp" />
+        tools:layout_editor_absoluteY="79dp"
+        android:src="@drawable/profile"
+        />
 
     <TextView
         android:id="@+id/textView2"
@@ -25,7 +28,7 @@
         tools:layout_editor_absoluteX="33dp"
         tools:layout_editor_absoluteY="352dp"
         android:layout_below="@id/profile_image"
-
+        android:layout_centerHorizontal="true"
         />
 
 
@@ -39,7 +42,9 @@
         android:textSize="25dp"
         tools:layout_editor_absoluteX="33dp"
         tools:layout_editor_absoluteY="397dp"
-        android:layout_below="@id/textView2"/>
+        android:layout_below="@id/textView2"
+        android:layout_centerHorizontal="true"
+        />
 
     <TextView
         android:id="@+id/textView3"
@@ -49,7 +54,9 @@
         android:textSize="25dp"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="450dp"
-        android:layout_below="@id/full_name"/>
+        android:layout_below="@id/full_name"
+        android:layout_centerHorizontal="true"
+        />
 
     <EditText
         android:id="@+id/mobile_number"
@@ -61,32 +68,36 @@
         android:textSize="25dp"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="495dp"
-        android:layout_below="@id/textView3"/>
+        android:layout_below="@id/textView3"
+        android:layout_centerHorizontal="true"
+        />
 
 
     <Button
         android:id="@+id/edit_button"
-        android:layout_width="111dp"
-        android:layout_height="58dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Edit"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="615dp"
-        android:layout_below="@id/mobile_number"/>
+        android:layout_below="@id/mobile_number"
+        android:layout_centerHorizontal="true"
+        />
 
     <Button
         android:id="@+id/delete_button"
-        android:layout_width="110dp"
-        android:layout_height="53dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Delete"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="630dp"
-        android:layout_below="@id/edit_button"/>
+        android:layout_below="@id/edit_button"
+        android:layout_centerHorizontal="true"
+        />
 
     <Button
         android:id="@+id/update_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update"
-        android:layout_below="@id/delete_button"/>
+        android:layout_below="@id/delete_button"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

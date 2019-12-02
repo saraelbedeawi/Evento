@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
                 getString(R.string.preference_user_info), MODE_PRIVATE);
         int userId = sharedPref.getInt(getString(R.string.user_info_id), -1);
 
-        if(userId > 0) {
+        if(FirebaseAuth.getInstance().getCurrentUser() != null) {
 
             new Handler().postDelayed(new Runnable() {
                 @Override

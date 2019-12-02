@@ -24,7 +24,6 @@ public class UserFriends
     public UserFriends(String userId, String friendId, String status, Date date) {
         this.userId = userId;
         FriendId = friendId;
-        Status = status;
         this.date = date;
     }
 
@@ -60,7 +59,7 @@ public class UserFriends
     public void setDate(Date date) {
         this.date = date;
     }
-
+    
 
     public void addFriend(FirebaseFirestore db)
     {

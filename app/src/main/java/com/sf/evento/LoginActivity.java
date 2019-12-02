@@ -70,24 +70,35 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                fileUploader().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            Uri downloadUri = task.getResult();
-                            User u = new User(full_name.getText().toString(), user.getPhoneNumber(),
-                                    downloadUri.getPath(), user.getUid());
-                            u.SaveUser(db);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                        } else {
-                            // Handle failures
-                            // ...
-                        }
-                    }
-                });
+                if(selected_image==null)
+                {
+                    User u = new User(full_name.getText().toString(), user.getPhoneNumber(),
+                            null, user.getUid());
+                    u.SaveUser(db);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
 
+                }
+                else {
+                    fileUploader().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                                User u = new User(full_name.getText().toString(), user.getPhoneNumber(),
+                                        downloadUri.getPath(), user.getUid());
+                                u.SaveUser(db);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            } else {
+                                // Handle failures
+                                // ...
+                            }
+                        }
+                    });
+                }
 
             }
         });
@@ -105,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Task<Uri> fileUploader()
     {
+
         final StorageReference ref=mStorageRef.child(System.currentTimeMillis()+"."+ getExtension(selected_image));
         return ref.putFile(selected_image)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -147,11 +159,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE && resultCode == RESULT_OK && data!=null && data.getData()!=null)
+
+        if (requestCode == PICK_IMAGE)
         {
             selected_image=data.getData();
             profile_image.setImageURI(selected_image);
-
+        }
+        else
+        {
+            profile_image.setImageURI(Uri.parse("https://firebasestorage.googleapis.com/v0/b/evento-d4c29.appspot.com/o/Images%2Fprofile.png?alt=media&token=fdc66cd9-ddbc-44d4-a058-6fd14a988ab2"));
         }
     }
 }

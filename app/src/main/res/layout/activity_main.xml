@@ -7,84 +7,64 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/create_event"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_row="1"
-        android:layout_column="1"
-        android:layout_marginTop="114dp"
-        android:layout_marginBottom="186dp"
-        app:layout_constraintBottom_toTopOf="@+id/logout"
+        app:layout_constraintBottom_toTopOf="@+id/my_events"
+        app:layout_constraintEnd_toStartOf="@+id/my_invitations"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/create_event" />
+
+    <ImageView
+        android:id="@+id/my_invitations"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/friends"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintStart_toEndOf="@id/create_event"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/events" />
 
     <ImageView
-        android:id="@+id/logout"
+        android:id="@+id/my_events"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_row="2"
-        android:layout_column="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/my_profile"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/logout" />
-
-    <ImageView
-        android:id="@+id/friends"
-        android:layout_width="211dp"
-        android:layout_height="0dp"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_marginBottom="205dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
-        app:srcCompat="@drawable/friends" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:layout_row="3"
-        android:layout_column="1"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="192dp"
-        android:layout_marginBottom="194dp"
-        app:layout_constraintBottom_toBottomOf="@+id/my_profile"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/friends"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@id/create_event"
+        app:layout_constraintBottom_toTopOf="@id/my_profile"
         app:srcCompat="@drawable/my_events" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/friends"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:layout_marginTop="125dp"
-        android:layout_marginBottom="207dp"
-        app:layout_constraintBottom_toTopOf="@+id/my_profile"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/create_event" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_invitations"
+        app:layout_constraintBottom_toTopOf="@id/logout"
+        app:layout_constraintStart_toEndOf="@id/my_events"
+        app:srcCompat="@drawable/friends" />
 
     <ImageView
         android:id="@+id/my_profile"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/logout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@id/my_events"
         app:srcCompat="@drawable/user" />
+
+    <ImageView
+        android:id="@+id/logout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/my_profile"
+        app:layout_constraintTop_toBottomOf="@id/friends"
+        app:srcCompat="@drawable/logout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
