@@ -6,13 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".PhoneVerificationActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"
+        />
+
+
     <EditText
+        android:id="@+id/phone"
+        android:paddingTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:hint="@string/mobile_number"
+        android:inputType="number"
+
         android:maxLength="11"
-        android:id="@+id/phone">
+        android:layout_below="@+id/img">
 
     </EditText>
 
@@ -21,10 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/phone"
-        android:layout_margin="10dp"
-        android:text="Sign Up"
-        ></Button>
+        android:layout_marginTop="08dp"
+        android:layout_marginBottom="10dp"
 
+        android:text="Login / Sign Up"></Button>
 
 
 </RelativeLayout>

@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
-            android:text="Wait for the code I sent You"
+            android:text="Enter the 6-digits sent in an SMS"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             />
 
@@ -64,7 +64,7 @@
             android:layout_marginTop="10dp"
             android:digits="0123456789"
             android:drawablePadding="10dp"
-            android:hint="enter verification code"
+
             android:inputType="phone"
             android:maxLength="10" />
 
@@ -78,7 +78,7 @@
             android:background="@color/colorPrimaryDark"
             android:text="Sign In"
             android:textAllCaps="false"
-            android:textColor="#cdd8f1" />
+      />
 
     </RelativeLayout>
 

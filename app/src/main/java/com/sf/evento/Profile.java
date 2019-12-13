@@ -83,10 +83,6 @@ public class Profile extends AppCompatActivity {
 
         full_name.setText(name);
         mobile_number.setText(number);
-
-
-
-
         edit_button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -133,7 +129,6 @@ public class Profile extends AppCompatActivity {
                 if(profile_image==null) {
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(full_name.getText().toString())
-//                        .setPhotoUri(profile_image))
                             .build();
                     user.updateProfile(profileUpdates)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

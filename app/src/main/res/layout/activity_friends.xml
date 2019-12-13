@@ -19,7 +19,7 @@
             android:layout_width="672dp"
             android:layout_height="437dp"
             android:padding="10dp"
-            android:src="@drawable/friends" />
+            android:src="@drawable/friendss" />
     </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"

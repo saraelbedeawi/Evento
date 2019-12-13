@@ -120,33 +120,6 @@ public class User
 
     }
 
-    public void SendRequest(FirebaseFirestore db, String userId,String friendId)
-    {
 
-        /*
-        DocumentReference washingtonRef = db.collection("cities").document("DC");
-
-        // Atomically add a new region to the "regions" array field.
-        washingtonRef.update("regions", FieldValue.arrayUnion("greater_virginia"));
-
-        * */
-        List<String> requests  = new ArrayList<>();
-        requests.add(friendId);
-
-        db.collection("users").document(userId).collection("outGoingFriends")
-                .document("outGoing").set(requests)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(Constraints.TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(Constraints.TAG, "Error writing document", e);
-                    }
-                });
-    }
 
 }

@@ -49,6 +49,8 @@ public class fragmentAddFriends extends Fragment
         name = view.findViewById(R.id.name);
         profileImage =view.findViewById(R.id.profile_image);
         addButton=view.findViewById(R.id.add);
+        layout=view.findViewById(R.id.profileCard);
+
         // Create a query against the collection.
         Button search = view.findViewById(R.id.search);
         search.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +72,7 @@ public class fragmentAddFriends extends Fragment
                                     String image =(String) ds.get("profilePicture");
                                     addButton.setTag(ds.getId());
                                     name.setText(Name);
+                                    layout.setVisibility(view.VISIBLE);
                                     }
 //                                    for (QueryDocumentSnapshot document : task.getResult()) {
 //                                        Log.d(TAG, document.getId() + " => " + document.getData());
@@ -89,12 +92,14 @@ public class fragmentAddFriends extends Fragment
         });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                    String userId = (String) addButton.getTag();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                com.sf.evento.User u= new com.sf.evento.User();
-                u.SendRequest(db,user.getUid(),userId);
+            public void onClick(View v)
+            {
 
+                String userId = (String) addButton.getTag();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                FriendRequests request= new FriendRequests(user.getUid(),userId);
+                request.SendRequest(db);
+                layout.setVisibility(view.GONE);
 
             }
         });

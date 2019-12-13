@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView logout,my_profile,friends;
+    ImageView logout,my_profile,friends,create_event;
     FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         logout=(ImageView)findViewById(R.id.logout);
         friends=(ImageView)findViewById(R.id.friends);
         my_profile=(ImageView)findViewById(R.id.my_profile);
+        create_event=(ImageView)findViewById(R.id.create_event);
         my_profile.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        create_event.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
 
+                Intent i = new Intent(MainActivity.this, CreateEvent.class);
+                startActivity(i);
+            }
+
+        });
     }
 }
