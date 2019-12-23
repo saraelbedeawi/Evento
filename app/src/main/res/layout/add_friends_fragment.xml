@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_marginTop="100dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:gravity="start">
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/search_textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    android:text="Search By phone Number"
+        android:text="Search By phone Number"
         android:textSize="20dp"
-        android:textStyle="bold"/>
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/phone">
+        android:id="@+id/phone"
+        android:layout_below="@id/search_textView"
+        android:inputType="phone"
+        >
     </EditText>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search"
+        android:text="@string/search"
+        android:layout_below="@id/phone"
         android:id="@+id/search">
     </Button>
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/profileCard"
+        android:layout_below="@id/search"
         android:visibility="gone"
         >
         <ImageView
@@ -40,15 +51,50 @@
             android:id="@+id/name"
             >
         </TextView>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addButtonLayout"
+        android:visibility="gone"
+        android:layout_below="@id/profileCard"
+        >
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/profile_image"
-            android:layout_below="@id/name"
             android:text="ADD"
             android:layout_marginTop="8dp"
-            android:id="@+id/add">
-
+            android:id="@+id/addButton">
         </Button>
     </RelativeLayout>
-</LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/acceptButtonLayout"
+        android:visibility="gone"
+        android:layout_below="@id/profileCard"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        >
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:layout_marginTop="8dp"
+            android:id="@+id/acceptButton">
+        </Button>
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="reject"
+            android:layout_marginTop="8dp"
+            android:id="@+id/rejectButton"
+            android:layout_toEndOf="@id/acceptButton"
+            >
+        </Button>
+    </RelativeLayout>
+
+
+</RelativeLayout>

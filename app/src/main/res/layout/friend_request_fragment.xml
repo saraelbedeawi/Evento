@@ -3,42 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
-<!--   <androidx.recyclerview.widget.RecyclerView-->
-<!--       android:layout_width="match_parent"-->
-<!--       android:layout_height="match_parent"-->
-<!--       android:id="@+id/RequestsRecycler">-->
-
-<!--   </androidx.recyclerview.widget.RecyclerView>-->
-   <LinearLayout
+   <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
-       android:layout_height="248dp"
-       android:orientation="vertical"
-       android:background="#121111"
+       android:layout_height="match_parent"
+       android:id="@+id/RequestsRecycler"
+       android:background="@color/colorPrimary"
        >
-      <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="180dp"
-          android:scaleType="centerCrop"
-          android:id="@+id/profileImage">
-      </ImageView>
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/name"
-          android:textColor="#ffff"
-          android:text="Name">
-      </TextView>
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/mobile_number"
-          android:textColor="#ffff"
-          android:text="Mobile">
 
+   </androidx.recyclerview.widget.RecyclerView>
 
-      </TextView>
-
-
-
-   </LinearLayout>
 </LinearLayout>

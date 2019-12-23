@@ -2,6 +2,7 @@ package com.sf.evento;
 
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.Constraints;
@@ -13,7 +14,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,16 +30,28 @@ import static android.content.ContentValues.TAG;
 
 public class User
 {
+
+
     private String id;
     private String fullName;
     private String phoneNumber;
     private String profilePicture;
+
+
+    private String token;
     private String inGoingFriends[];
     private String outGoingFriends[];
     private String myFriends[];
 
     public String getProfilePicture() {
         return profilePicture;
+    }
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public void setProfilePicture(String profilePicture) {
@@ -52,7 +70,9 @@ public class User
         this.profilePicture=profilePicture;
         this.id=id;
     }
-
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getfullName() {
         return fullName;
     }
@@ -120,6 +140,81 @@ public class User
 
     }
 
+    public void Accept(FirebaseFirestore db, DocumentSnapshot friendDS)
+    {
+        Map<String, Object> userMap = new HashMap<>();
+        String friendPhone = (String) friendDS.get("phoneNumber");
+        String friendId = friendDS.getId();
+        db.collection("users").document(this.id).collection("friends").document(friendPhone).set(userMap);
+        db.collection("users").document(friendId).collection("friends").document(this.phoneNumber).set(userMap);
+        CollectionReference friendRequestsRef = db.collection("FriendRequests");
+        Query query = friendRequestsRef
+                .whereEqualTo("from", friendPhone)
+                .whereEqualTo("to", this.phoneNumber)
+                .whereEqualTo("status", "Pending");
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && task.getResult().size() > 0)
+                        {
+                            DocumentSnapshot ds = task.getResult().getDocuments().get(0);
+                            ds.getReference().update("status","Approved");
+
+                        }
+
+                    }
+                });
+    }
+public  void Reject (FirebaseFirestore db, DocumentSnapshot friendDS)
+{
+    String friendPhone = (String) friendDS.get("phoneNumber");
+    CollectionReference friendRequestsRef = db.collection("FriendRequests");
+    Query query = friendRequestsRef
+            .whereEqualTo("from", friendPhone)
+            .whereEqualTo("to", this.phoneNumber)
+            .whereEqualTo("status", "Pending");
+    query.get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult().size() > 0)
+                    {
+                        DocumentSnapshot ds = task.getResult().getDocuments().get(0);
+                        ds.getReference().update("status","Rejected");
+
+                    }
+
+                }
+            });
+}
+public void SaveToken(FirebaseFirestore db)
+{
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DocumentReference washingtonRef = db.collection("users").document(user.getUid());
+    washingtonRef
+            .update("token", token);
+}
+//    public  void Remove (FirebaseFirestore db, DocumentSnapshot friendDS)
+//    {
+//        String friendPhone = (String) friendDS.get("phoneNumber");
+//        CollectionReference friends = db.collection("users").document(user.getUid()).collection("friends");
+//        Query query = friends
+//                .whereEqualTo("status", "Pending");
+//        query.get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful() && task.getResult().size() > 0)
+//                        {
+//                            DocumentSnapshot ds = task.getResult().getDocuments().get(0);
+//                            ds.getReference().update("status","Rejected");
+//
+//                        }
+//
+//                    }
+//                });
+//    }
 
 
 }

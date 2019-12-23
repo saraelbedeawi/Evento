@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,19 +27,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.StorageReference;
+import com.sf.evento.Adapters.FriendRequestAdapter;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class FragmentFriendRequests extends Fragment
 {
     View view;
-    private RecyclerView mRequestList;
+
     private FirebaseFirestore db;
     private FirebaseUser user;
-    private TextView name,mobile;
-    private ImageView profileImage;
-    String fromid;
+    private RecyclerView recyclerView;
+
     public FragmentFriendRequests() {
     }
 
@@ -46,16 +50,11 @@ public class FragmentFriendRequests extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.friend_request_fragment,container,false);
-//        mRequestList=(RecyclerView)view.findViewById(R.id.RequestsRecycler);
-//        mRequestList.setHasFixedSize(true);
-//        mRequestList.setLayoutManager(new LinearLayoutManager(getContext()));
         db = FirebaseFirestore.getInstance();
-        name=(TextView)view.findViewById(R.id.name);
-        mobile=(TextView)view.findViewById(R.id.mobile_number);
-
+        recyclerView=view.findViewById(R.id.RequestsRecycler);
         CollectionReference Requesets = db.collection("FriendRequests");
         user = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = Requesets.whereEqualTo("to", user.getUid());
+        Query query = Requesets.whereEqualTo("to", user.getPhoneNumber()).whereEqualTo("status","Pending");
         query.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -63,26 +62,16 @@ public class FragmentFriendRequests extends Fragment
                     {
                         if (task.isSuccessful()) {
                             if(task.getResult().size() > 0) {
-                                DocumentSnapshot ds = task.getResult().getDocuments().get(0);
-                                fromid= (String) ds.get("from");
-                                DocumentReference  docRef  =    db.collection("users").document(fromid);
-                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            DocumentSnapshot document = task.getResult();
-                                            if (document.exists()) {
-                                                name.setText((String)document.get("name"));
-                                                String p = (String)document.get("ProfilePicture");
-                                                mobile.setText((String)document.get("phoneNumber"));
-                                            } else {
-                                                Log.d(TAG, "No such document");
-                                            }
-                                        } else {
-                                            Log.d(TAG, "get failed with ", task.getException());
-                                        }
-                                    }
-                                });
+                                List<DocumentSnapshot> ds = task.getResult().getDocuments();
+                                FriendRequestAdapter friendRequestAdapter = new FriendRequestAdapter(db, ds);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(FragmentFriendRequests.this.getContext(),RecyclerView.VERTICAL,false));
+                                recyclerView.setAdapter(friendRequestAdapter);
+                            }
+                            else
+                            {
+                                Toast.makeText(
+                                        getActivity().getApplicationContext(), "No Friend Requests", Toast.LENGTH_LONG
+                                ).show();
                             }
                         }
                         else {

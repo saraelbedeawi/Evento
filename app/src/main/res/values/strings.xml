@@ -13,6 +13,7 @@
     <string name="create_event">create Event</string>
     <string name="add">add</string>
     <string name="remove">remove</string>
+    <string name="search">Search</string>
 
 
 </resources>

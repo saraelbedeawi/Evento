@@ -24,13 +24,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.net.URL;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -45,14 +47,17 @@ public class Profile extends AppCompatActivity {
     ImageView profile_image;
     Button edit_button, delete_button,update_button;
     FirebaseUser user;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
+        db = FirebaseFirestore.getInstance();
+
         full_name=(EditText)findViewById(R.id.full_name);
         mobile_number=(EditText)findViewById(R.id.mobile_number);
         profile_image=(ImageView) findViewById(R.id.profile_image);
@@ -66,7 +71,6 @@ public class Profile extends AppCompatActivity {
         String number= user.getPhoneNumber();
 
         if(user.getPhotoUrl() != null) {
-            StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("Images");
             mStorageRef.child(user.getPhotoUrl().getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
@@ -125,8 +129,7 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v)
             {
 
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(profile_image==null) {
+                if(imgURI==null) {
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                             .setDisplayName(full_name.getText().toString())
                             .build();
@@ -136,6 +139,23 @@ public class Profile extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Log.d(TAG, "User profile updated.");
+                                        Map<String, Object> userMap = new HashMap<>();
+                                        userMap.put("name", full_name.getText().toString());
+                                        db.collection("users").document(user.getUid())
+                                                .set(userMap)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error writing document", e);
+                                                    }
+                                                });
+
                                         Intent i = new Intent(Profile.this, MainActivity.class);
                                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(i);
@@ -148,9 +168,9 @@ public class Profile extends AppCompatActivity {
                     fileUploader().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if (task.isSuccessful()) {
-                                Uri downloadUri = task.getResult();
+                                final Uri downloadUri = task.getResult();
 
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(full_name.getText().toString())
@@ -162,6 +182,25 @@ public class Profile extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     Log.d(TAG, "User profile updated.");
+
+                                                    Map<String, Object> userMap = new HashMap<>();
+                                                    userMap.put("name", full_name.getText().toString());
+                                                    userMap.put("profilePicture", downloadUri.getPath());
+                                                    db.collection("users").document(user.getUid())
+                                                            .set(userMap)
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Log.w(TAG, "Error writing document", e);
+                                                                }
+                                                            });
+
                                                     Intent i = new Intent(Profile.this, MainActivity.class);
                                                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                     startActivity(i);

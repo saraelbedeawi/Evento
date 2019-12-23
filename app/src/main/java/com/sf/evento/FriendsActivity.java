@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.sf.evento.Adapters.ViewPageAdapter;
 
 public class FriendsActivity extends AppCompatActivity {
  private TabLayout tablayout;

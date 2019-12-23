@@ -52,22 +52,13 @@
             android:layout_toEndOf="@id/profileImage"
             android:layout_alignBottom="@id/profileImage"
             >
+
             <Button
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Accept"
+                android:text="Remove"
                 android:layout_marginTop="8dp"
-                android:id="@+id/acceptButton"
-                android:background="@color/colorPrimary"
-                >
-            </Button>
-            <Button
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="reject"
-                android:layout_marginTop="8dp"
-                android:id="@+id/rejectButton"
-                android:layout_toEndOf="@id/acceptButton"
+                android:id="@+id/removeButton"
                 android:background="@color/colorAccent"
                 android:textColor="#FFF"
                 >

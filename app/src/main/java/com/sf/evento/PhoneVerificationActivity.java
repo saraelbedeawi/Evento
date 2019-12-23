@@ -43,7 +43,7 @@ public class PhoneVerificationActivity extends AppCompatActivity {
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_phone_verification);
+//        setContentView(R.profileCardLayout.activity_phone_verification);
 //        phone=(EditText)findViewById(R.id.phone);
 //        loginBtn = findViewById(R.id.sign_up);
 //        loginBtn.setOnClickListener(new View.OnClickListener() {
