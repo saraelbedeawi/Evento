@@ -7,18 +7,24 @@
     tools:context=".LoginActivity">
 
 
+
+
     <ImageView
         android:id="@+id/profile_image"
-        android:layout_width="212dp"
-        android:layout_height="200dp"
+        android:layout_width="237dp"
+        android:layout_height="230dp"
         android:src="@drawable/profile"
-        android:layout_marginTop="30dp"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="79dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
         />
 
     <EditText
         android:id="@+id/full_name"
         android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginTop="30dp"
@@ -29,7 +35,8 @@
 
     <Button
         android:id="@+id/save_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:layout_marginTop="30dp"

@@ -28,8 +28,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/name"
             android:layout_toEndOf="@id/profileImage"
-
+            android:textSize="18dp"
             android:textColor="#000"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
             android:text="Name">
         </TextView>
         <TextView
@@ -39,10 +41,14 @@
             android:layout_toEndOf="@id/profileImage"
             android:layout_below="@id/name"
             android:textColor="#000"
+            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
             android:text="Mobile">
         </TextView>
 
         <RelativeLayout
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/acceptButtonLayout"
@@ -59,6 +65,8 @@
                 android:layout_marginTop="8dp"
                 android:id="@+id/acceptButton"
                 android:background="@color/colorPrimary"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 >
             </Button>
             <Button
