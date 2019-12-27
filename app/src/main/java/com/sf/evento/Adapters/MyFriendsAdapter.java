@@ -70,8 +70,8 @@ public class MyFriendsAdapter extends RecyclerView.Adapter<MyFriendsAdapter.View
                 DocumentSnapshot ds = task.getResult().getDocuments().get(0);
                 String image= (String) ds.get("profilePicture");
                 holder.name.setText((String) ds.get("name"));
-                holder.mobile.setText(mobile1);
-
+                holder.mobile.setText((String) ds.get("phoneNumber"));
+                holder.remove.setTag(ds);
 
                 mStorageRef.child(Uri.parse(image).getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
@@ -90,18 +90,17 @@ public class MyFriendsAdapter extends RecyclerView.Adapter<MyFriendsAdapter.View
 
 
         });
-//        holder.remove.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DocumentSnapshot ds = (DocumentSnapshot) holder.remove.getTag();
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                User u=new User();
-//                u.setId(user.getUid());
-//                u.setPhoneNumber(user.getPhoneNumber());
-//                u.Remove(db, ds);
-//                friends.remove(holder.getAdapterPosition());
-//            }
-//        });
+      holder.remove.setOnClickListener(new View.OnClickListener() {
+           @Override
+            public void onClick(View v) {
+                DocumentSnapshot ds = (DocumentSnapshot) holder.remove.getTag();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                User u=new User();
+                u.setId(user.getUid());u.setPhoneNumber(user.getPhoneNumber());
+               u.Remove(db, ds);
+               friends.remove(position);
+           }
+        });
 
     }
 

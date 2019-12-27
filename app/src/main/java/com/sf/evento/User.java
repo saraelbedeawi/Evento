@@ -1,5 +1,6 @@
 package com.sf.evento;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -195,26 +196,39 @@ public void SaveToken(FirebaseFirestore db)
     washingtonRef
             .update("token", token);
 }
-//    public  void Remove (FirebaseFirestore db, DocumentSnapshot friendDS)
-//    {
-//        String friendPhone = (String) friendDS.get("phoneNumber");
-//        CollectionReference friends = db.collection("users").document(user.getUid()).collection("friends");
-//        Query query = friends
-//                .whereEqualTo("status", "Pending");
-//        query.get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful() && task.getResult().size() > 0)
-//                        {
-//                            DocumentSnapshot ds = task.getResult().getDocuments().get(0);
-//                            ds.getReference().update("status","Rejected");
-//
-//                        }
-//
-//                    }
-//                });
-//    }
+    public  void Remove (FirebaseFirestore db, DocumentSnapshot friendDS)
+    {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        db.collection("users").document(user.getUid()).collection("friends").document((String)friendDS.get("phoneNumber")).delete()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error deleting document", e);
+                }
+            });
+        db.collection("users").document((String)friendDS.getId()).collection("friends").document(user.getPhoneNumber()).delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+    }
+
 
 
 }

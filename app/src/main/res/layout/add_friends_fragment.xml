@@ -39,11 +39,11 @@
         android:layout_below="@id/search"
         android:visibility="gone"
         >
-        <ImageView
-            android:layout_width="100dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+
+        android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/profile_image">
-        </ImageView>
+            android:id="@+id/profile_image"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

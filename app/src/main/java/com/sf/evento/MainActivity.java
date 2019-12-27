@@ -20,7 +20,7 @@ import com.google.firebase.iid.InstanceIdResult;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView logout,my_profile,friends,create_event;
+    ImageView logout,my_profile,friends,create_event,my_event;
     FirebaseUser user;
     private FirebaseFirestore db;
 
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         friends=(ImageView)findViewById(R.id.friends);
         my_profile=(ImageView)findViewById(R.id.my_profile);
         create_event=(ImageView)findViewById(R.id.create_event);
+        my_event=(ImageView)findViewById(R.id.my_events);
         db = FirebaseFirestore.getInstance();
 
         my_profile.setOnClickListener(new View.OnClickListener()
@@ -79,6 +80,21 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        my_event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent sendIntent = new Intent();
+//                sendIntent.setAction(Intent.ACTION_SEND);
+//                sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+//                sendIntent.setType("text/plain");
+//                sendIntent.setPackage("com.whatsapp");
+//                startActivity(sendIntent);
+                Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(i);
+
+            }
+        });
+
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
