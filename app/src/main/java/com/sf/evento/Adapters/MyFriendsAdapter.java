@@ -28,7 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sf.evento.R;
-import com.sf.evento.User;
+import com.sf.evento.Classes.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

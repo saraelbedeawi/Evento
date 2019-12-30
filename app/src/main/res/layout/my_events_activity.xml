@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activites.FriendsActivity"
+    tools:context=".Activites.MyEvents"
     android:orientation="vertical">
 
 
@@ -19,7 +19,7 @@
             android:layout_width="672dp"
             android:layout_height="437dp"
             android:padding="10dp"
-            android:src="@drawable/friendss" />
+            android:src="@drawable/my_events" />
     </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:id="@+id/tabellayout_id"
         app:tabTextColor="@color/tabtextcolor"
         app:tabIndicatorColor="@color/tabindicatorcolor"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorAccent"/>
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"

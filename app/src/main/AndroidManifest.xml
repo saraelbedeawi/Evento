@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sf.evento">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -19,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Activites.MyEvents"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,24 +32,28 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".CreateEvent" />
-        <activity android:name=".Profile" />
-        <activity android:name=".FriendsActivity" />
-        <activity android:name=".CodeVerficationActivity" />
-        <activity android:name=".PhoneVerificationActivity" />
+            android:name=".Activites.RetrieveMap"
+            android:label="@string/title_activity_retrieve_map" />
+        <activity android:name=".Activites.EventRequests" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activites.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Activites.CreateEvent" />
+        <activity android:name=".Activites.Profile" />
+        <activity android:name=".Activites.FriendsActivity" />
+        <activity android:name=".Activites.CodeVerficationActivity" />
+        <activity android:name=".Activites.PhoneVerificationActivity" />
+        <activity
+            android:name=".Activites.LoginActivity"
             android:exported="true" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Activites.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activites.MainActivity" />
 
         <service
             android:name=".Services.MyFirebaseMessagingService"

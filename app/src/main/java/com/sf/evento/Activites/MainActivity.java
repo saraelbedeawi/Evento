@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Activites;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +17,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.sf.evento.Classes.User;
+import com.sf.evento.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView logout,my_profile,friends,create_event,my_event;
+    ImageView logout,my_profile,friends,create_event,my_event,my_invitations;
     FirebaseUser user;
     private FirebaseFirestore db;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         my_profile=(ImageView)findViewById(R.id.my_profile);
         create_event=(ImageView)findViewById(R.id.create_event);
         my_event=(ImageView)findViewById(R.id.my_events);
+        my_invitations=(ImageView)findViewById(R.id.my_invitations);
         db = FirebaseFirestore.getInstance();
 
         my_profile.setOnClickListener(new View.OnClickListener()
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(MainActivity.this, CreateEvent.class);
+                Intent i = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(i);
             }
 
@@ -89,9 +92,16 @@ public class MainActivity extends AppCompatActivity {
 //                sendIntent.setType("text/plain");
 //                sendIntent.setPackage("com.whatsapp");
 //                startActivity(sendIntent);
-                Intent i = new Intent(MainActivity.this, MapsActivity.class);
+                Intent i = new Intent(MainActivity.this, MyEvents.class);
                 startActivity(i);
 
+            }
+        });
+        my_invitations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, EventRequests.class);
+                startActivity(i);
             }
         });
 

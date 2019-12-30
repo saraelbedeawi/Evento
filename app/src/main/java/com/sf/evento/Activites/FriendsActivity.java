@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -8,6 +8,10 @@ import android.os.Bundle;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.sf.evento.Adapters.ViewPageAdapter;
+import com.sf.evento.Fragments.FragmentFriendRequests;
+import com.sf.evento.Fragments.FragmentMyFriends;
+import com.sf.evento.Fragments.fragmentAddFriends;
+import com.sf.evento.R;
 
 public class FriendsActivity extends AppCompatActivity {
  private TabLayout tablayout;

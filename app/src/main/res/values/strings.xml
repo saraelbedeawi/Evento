@@ -20,6 +20,9 @@
     <string name="ok_label">OK</string>
     <string name="dismiss_label">Dismiss</string>
     <string name="clear_all_label">Clear all</string>
+    <string name="EventDate">Event Date</string>
+    <string name="from">From:</string>
+    <string name="title_activity_retrieve_map">Map</string>
 
 
 </resources>

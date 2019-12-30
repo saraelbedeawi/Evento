@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Activites;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.sf.evento.R;
 import com.squareup.picasso.Picasso;
 
 

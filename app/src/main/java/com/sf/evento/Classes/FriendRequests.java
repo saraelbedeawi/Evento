@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Classes;
 
 import android.util.Log;
 import android.widget.TextView;

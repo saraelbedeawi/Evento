@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +32,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.sf.evento.Classes.User;
+import com.sf.evento.Classes.FriendRequests;
+import com.sf.evento.R;
 import com.squareup.picasso.Picasso;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;

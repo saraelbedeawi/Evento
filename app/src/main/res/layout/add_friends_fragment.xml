@@ -61,12 +61,12 @@
         android:layout_below="@id/profileCard"
         >
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ADD"
-            android:layout_marginTop="8dp"
-            android:id="@+id/addButton">
-        </Button>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:layout_marginTop="8dp"
+        android:id="@+id/addButton">
+    </Button>
     </RelativeLayout>
 
     <RelativeLayout

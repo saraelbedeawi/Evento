@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="7dp"
+    android:elevation="90dp"
+    android:background="#FFF"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:id="@+id/individual_row"
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:id="@+id/first"
+        >
+
+        <ImageView
+            android:id="@+id/gps"
+            android:layout_width="62dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="27dp"
+            android:layout_toRightOf="@id/event_sender"
+            android:onClick="showLocation"
+            android:src="@drawable/gps" />
+
+        <TextView
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/event_sender"
+            android:textSize="20dp"
+            android:hint="@string/from"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/event_name"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:hint="Event Name"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/event_sender"
+            />
+
+        <TextView
+            android:id="@+id/event_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event Address"
+            android:layout_below="@id/event_name"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/event_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/event_address"
+            android:clickable="true"
+            android:textSize="20dp"
+            android:hint="@string/EventDate"
+            android:layout_marginTop="10dp"
+            />
+        />
+
+        <TextView
+            android:id="@+id/event_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:hint="Event Start Time"
+            android:layout_below="@id/event_date"/>
+
+        <TextView
+            android:id="@+id/event_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/event_start_time"
+            android:layout_marginTop="10dp"
+            android:inputType="time"
+            android:hint="Event End Time"
+            android:layout_below="@id/event_date"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/event_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20dp"
+            android:inputType="time"
+            android:hint="Event Location"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/event_end_time"
+            />
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/acceptButtonLayout"
+            android:layout_below="@id/event_location"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+
+            >
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="reject"
+                android:layout_marginTop="8dp"
+                android:id="@+id/rejectButton"
+                android:background="@color/colorAccent"
+                android:textColor="#FFF"
+                >
+            </Button>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

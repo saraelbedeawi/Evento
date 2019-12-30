@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,10 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.sf.evento.Adapters.FriendRequestAdapter;
 import com.sf.evento.Adapters.MyFriendsAdapter;
+import com.sf.evento.R;
 
 import java.util.List;
 

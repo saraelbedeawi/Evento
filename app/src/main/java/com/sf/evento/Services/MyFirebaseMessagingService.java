@@ -1,10 +1,8 @@
 package com.sf.evento.Services;
 
-import android.util.Log;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessagingService;
-import com.sf.evento.User;
+import com.sf.evento.Classes.User;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private FirebaseFirestore db;

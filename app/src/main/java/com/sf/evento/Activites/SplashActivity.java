@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.sf.evento.R;
 
 public class SplashActivity extends AppCompatActivity {
 

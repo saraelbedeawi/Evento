@@ -1,4 +1,4 @@
-package com.sf.evento;
+package com.sf.evento.Classes;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -37,12 +37,8 @@ public class User
     private String fullName;
     private String phoneNumber;
     private String profilePicture;
-
-
     private String token;
-    private String inGoingFriends[];
-    private String outGoingFriends[];
-    private String myFriends[];
+
 
     public String getProfilePicture() {
         return profilePicture;
@@ -215,18 +211,18 @@ public void SaveToken(FirebaseFirestore db)
                 }
             });
         db.collection("users").document((String)friendDS.getId()).collection("friends").document(user.getPhoneNumber()).delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error deleting document", e);
-                    }
-                });
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error deleting document", e);
+                }
+            });
     }
 
 
