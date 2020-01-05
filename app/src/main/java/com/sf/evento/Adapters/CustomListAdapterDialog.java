@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -33,6 +34,13 @@ public class CustomListAdapterDialog extends BaseAdapter {
         this.friends = friends;
         this.db = db;
     }
+    public CustomListAdapterDialog(List<DocumentSnapshot> friends,FirebaseFirestore db,ArrayList<String> mSelectedItemsIds)
+    {
+        this.friends = friends;
+        this.db = db;
+        this.mSelectedItemsIds=mSelectedItemsIds;
+    }
+
 
     @Override
     public int getCount() {
@@ -58,51 +66,54 @@ public class CustomListAdapterDialog extends BaseAdapter {
 //        }
 
         //final ViewHolder holder = new ViewHolder();
-        final CheckBox name = convertView.findViewById(R.id.guestName);
-        String mobile1 = friends.get(position).getId();
-        name.setTag(mobile1);
 
-        CollectionReference users = db.collection("users");
-        Query query = users.whereEqualTo("phoneNumber", mobile1);
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task)
-            {
-                DocumentSnapshot ds = task.getResult().getDocuments().get(0);
-                name.setText((String) ds.get("name"));
 
-                name.setChecked(false);
-                for (int i = 0; i < mSelectedItemsIds.size(); i++) {
-                    String phone = mSelectedItemsIds.get(i);
-                    if(phone.equals(ds.get("phoneNumber")))
-                        name.setChecked(true);
-                }
 
-            }
-        });
 
-        name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(name.isChecked()){
-                    boolean found = false;
+            final CheckBox name = convertView.findViewById(R.id.guestName);
+            String mobile1 = friends.get(position).getId();
+            name.setTag(mobile1);
+
+            CollectionReference users = db.collection("users");
+            Query query = users.whereEqualTo("phoneNumber", mobile1);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    DocumentSnapshot ds = task.getResult().getDocuments().get(0);
+                    name.setText((String) ds.get("name"));
+
+                    name.setChecked(false);
                     for (int i = 0; i < mSelectedItemsIds.size(); i++) {
                         String phone = mSelectedItemsIds.get(i);
-                        String friendPhone = buttonView.getTag().toString();
-                        if (phone.equals(friendPhone))
-                            found = true;
+                        if (phone.equals(ds.get("phoneNumber")))
+                            name.setChecked(true);
                     }
 
-                    if(!found)
-                        mSelectedItemsIds.add((String) name.getTag());
+                }
+            });
+
+            name.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (name.isChecked()) {
+                        boolean found = false;
+                        for (int i = 0; i < mSelectedItemsIds.size(); i++) {
+                            String phone = mSelectedItemsIds.get(i);
+                            String friendPhone = buttonView.getTag().toString();
+                            if (phone.equals(friendPhone))
+                                found = true;
+                        }
+
+                        if (!found)
+                            mSelectedItemsIds.add((String) name.getTag());
 
 //                    Toast.makeText(parent.getContext(), holder.name.getText()+"", Toast.LENGTH_SHORT).show();
-                }else{
+                    } else {
 //                    Toast.makeText(parent.getContext(), "sayb "+holder.name.getText()+"", Toast.LENGTH_SHORT).show();
-                    mSelectedItemsIds.remove(name.getTag());
+                        mSelectedItemsIds.remove(name.getTag());
+                    }
                 }
-            }
-        });
+            });
 
 
         return convertView;

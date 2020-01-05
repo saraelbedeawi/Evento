@@ -1,8 +1,12 @@
 package com.sf.evento.Classes;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.Constraints;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -16,9 +20,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sf.evento.Adapters.FriendRequestAdapter;
+import com.sf.evento.Fragments.FragmentFriendRequests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
@@ -39,7 +46,7 @@ public class Event
     public  double longitude;
     public   ArrayList<String> guests;
     public  String description;
-
+    public ArrayList<String> oldguests;
     public Event(String creatorId, String adresse, String name, String date, String startTime, String endTime, double latitude, double longitude, ArrayList<String> guests, String description) {
         this.creatorId = creatorId;
         this.adresse = adresse;
@@ -157,7 +164,7 @@ public class Event
        userMap.put("adresse", this.adresse);
        userMap.put("startTime", this.startTime);
        userMap.put("endTime", this.endTime);
-       userMap.put("description", this.description);
+       //userMap.put("description", this.description);
        userMap.put("location", new com.google.firebase.firestore.GeoPoint(this.latitude, this.longitude));
        userMap.put("guests",this.guests);
 
@@ -258,6 +265,124 @@ public class Event
                     }
                 });
     }
+    public void delete()
+    {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        db.collection("events").document(this.id).delete();
+        Query x= db.collection("eventsRequests").whereEqualTo("eventId",this.id);
+        x.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful() && task.getResult().size() > 0)
+                {
+                    DocumentSnapshot ds = task.getResult().getDocuments().get(0);
+                    db.collection("eventsRequests").document(ds.getId()).delete();
+                }
 
+            }
+        });
+
+
+
+    }
+    public void UpdateEvent() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
+
+        //guests = new ArrayList<>();
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("name", this.name);
+        userMap.put("eventDate", this.date);
+        userMap.put("creatorId", user.getUid());
+        userMap.put("adresse", this.adresse);
+        userMap.put("startTime", this.startTime);
+        userMap.put("endTime", this.endTime);
+        userMap.put("description", this.description);
+        userMap.put("location", new com.google.firebase.firestore.GeoPoint(this.latitude, this.longitude));
+        userMap.put("guests", this.guests);
+        userMap.put("location", new com.google.firebase.firestore.GeoPoint(this.latitude, this.longitude));
+
+        db.collection("events").document(this.id).update(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+        for (int i = 0; i < this.oldguests.size(); i++) {
+            boolean found = false;
+            for (int j = 0; j < this.guests.size(); j++) {
+
+                if (this.oldguests.get(i).equals(this.guests.get(j))) {
+                    found = true;
+                    break;
+                }
+
+            }
+            if (!found) {
+                deleteEventRequest(this.id, this.oldguests.get(i));
+            }
+        }
+
+
+        for (int j = 0; j < this.guests.size(); j++) {
+            boolean found = false;
+            for (int i = 0; i < this.oldguests.size(); i++) {
+
+                if (this.oldguests.get(i).equals(this.guests.get(j))) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                eventRequest = new HashMap<>();
+                eventRequest.put("to", this.guests.get(j));
+                eventRequest.put("eventId", this.id);
+                eventRequest.put("from", user.getPhoneNumber());
+                eventRequest.put("status", "pending");
+                db.collection("eventsRequests").add(eventRequest)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.w("FIREBASE", "Success on Adding");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("FIREBASE", "Failed on Adding");
+                            }
+                        });
+            }
+        }
+
+    }
+
+    private void deleteEventRequest(String eventId, String oldGuestId) {
+        Query d=db.collection("eventsRequests").whereEqualTo("to",oldGuestId).whereEqualTo("eventId",eventId);
+        d.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful())
+                        {
+                            DocumentSnapshot ds = task.getResult().getDocuments().get(0);
+                            db.collection("eventsRequests").document(ds.getId()).delete();
+                        }
+
+                    }
+                });
+    }
 
 }
+

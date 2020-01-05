@@ -44,10 +44,10 @@ public class RetrieveMap extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         mMap.addMarker(new MarkerOptions().position(position));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(position, 11.0f);
         mMap.animateCamera(yourLocation);
+
     }
 }

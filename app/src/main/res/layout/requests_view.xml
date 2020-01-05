@@ -22,7 +22,8 @@
         android:layout_width="180dp"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
-            android:id="@+id/profileImage"/>
+            android:id="@+id/profileImage"
+            android:src="@drawable/profile"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

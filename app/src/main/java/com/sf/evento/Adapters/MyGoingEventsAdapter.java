@@ -1,5 +1,6 @@
 package com.sf.evento.Adapters;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -26,6 +29,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.sf.evento.Activites.EditEvent;
 import com.sf.evento.Classes.Event;
 import com.sf.evento.R;
 import com.sf.evento.Activites.RetrieveMap;
@@ -82,21 +86,42 @@ public class MyGoingEventsAdapter extends RecyclerView.Adapter<MyGoingEventsAdap
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    holder.name.setText( " Event name: "+(String)document.get("name"));
-                    holder.startTime.setText( "Start time: "+(String)document.get("startTime"));
-                    holder.endTime.setText("End time: "+(String)document.get("endTime"));
-                    holder.date.setText("Event date: "+(String) document.get("eventDate"));
-                    holder.adresse.setText("address: "+(String)document.get("adresse"));
+                    holder.name.setText( "Event name: "+(String)document.get("name"));
+                    holder.startTime.setText( "Start Time: "+(String)document.get("startTime"));
+                    holder.endTime.setText("End Time: "+(String)document.get("endTime"));
+                    holder.date.setText("Event Date: "+(String) document.get("eventDate"));
+                    holder.adresse.setText("Address: "+(String)document.get("adresse"));
                     holder.location.setTag(document.get("location"));
 
 
                     holder.reject.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String id = (String) holder.reject.getTag();
-                            Event e=new Event();
-                            e.remove(db, id);
-                            requests.remove(holder.getAdapterPosition());
+                            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which){
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            String id = (String) holder.reject.getTag();
+                                            Event e=new Event();
+                                            e.remove(db, id);
+                                            requests.remove(holder.getAdapterPosition());
+                                            notifyDataSetChanged();
+                                            Toast.makeText(holder.itemView.getContext(), "Declined successfully. ", Toast.LENGTH_LONG).show();                                            break;
+
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            //No button clicked
+                                            break;
+                                    }
+                                }
+                            };
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                            builder.setMessage("Are you sure you want to remove event "+holder.from.getText()+"?").setPositiveButton("Yes", dialogClickListener)
+                                    .setNegativeButton("No", dialogClickListener).show();
+
+
+
                         }
                     });
                     if (document.exists()) {

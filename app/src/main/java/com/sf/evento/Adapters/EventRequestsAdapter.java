@@ -83,11 +83,11 @@ public class EventRequestsAdapter extends RecyclerView.Adapter<EventRequestsAdap
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    holder.name.setText( " Event name: "+(String)document.get("name"));
-                    holder.startTime.setText( "Start time: "+(String)document.get("startTime"));
-                    holder.endTime.setText("End time: "+(String)document.get("endTime"));
-                    holder.date.setText("Event date: "+(String) document.get("eventDate"));
-                    holder.adresse.setText("address: "+(String)document.get("adresse"));
+                    holder.name.setText( "Event name: "+(String)document.get("name"));
+                    holder.startTime.setText( "Start Time: "+(String)document.get("startTime"));
+                    holder.endTime.setText("End Time: "+(String)document.get("endTime"));
+                    holder.date.setText("Event Date: "+(String) document.get("eventDate"));
+                    holder.adresse.setText("Address: "+(String)document.get("adresse"));
                     holder.location.setTag(document.get("location"));
 
                     holder.accept.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +99,8 @@ public class EventRequestsAdapter extends RecyclerView.Adapter<EventRequestsAdap
 
                             e.Accept(db, id);
                             requests.remove(holder.getAdapterPosition());
+                            notifyDataSetChanged();
+
                         }
                     });
                     holder.reject.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +110,8 @@ public class EventRequestsAdapter extends RecyclerView.Adapter<EventRequestsAdap
                             Event e=new Event();
                             e.remove(db, id);
                             requests.remove(holder.getAdapterPosition());
+                            notifyDataSetChanged();
+
                         }
                     });
 

@@ -73,18 +73,20 @@ public class MyFriendsAdapter extends RecyclerView.Adapter<MyFriendsAdapter.View
                 holder.mobile.setText((String) ds.get("phoneNumber"));
                 holder.remove.setTag(ds);
 
-                mStorageRef.child(Uri.parse(image).getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // Got the download URL for 'users/me/profile.png'
-                        Picasso.get().load(uri).into(holder.profileImage);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
-                });
+                if(image!=null) {
+                    mStorageRef.child(Uri.parse(image).getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            // Got the download URL for 'users/me/profile.png'
+                            Picasso.get().load(uri).into(holder.profileImage);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+                }
 
             }
 
@@ -99,6 +101,8 @@ public class MyFriendsAdapter extends RecyclerView.Adapter<MyFriendsAdapter.View
                 u.setId(user.getUid());u.setPhoneNumber(user.getPhoneNumber());
                u.Remove(db, ds);
                friends.remove(position);
+               notifyDataSetChanged();
+
            }
         });
 

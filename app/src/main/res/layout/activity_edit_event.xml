@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    >
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,7 +10,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_event"
+        android:text="@string/edit_event"
         android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteX="159dp"
         tools:layout_editor_absoluteY="46dp"
@@ -30,71 +20,117 @@
         android:textSize="30dp"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/textView4"
+        android:id="@+id/namee"
+        />
 
     <EditText
         android:id="@+id/event_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView4"
-        android:layout_marginTop="10dp"
+        android:hint="Event Name"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="Event Name" />
+        android:layout_below="@id/namee"
+        />
 
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address:"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/event_name"
+        android:id="@+id/addresss"
+        />
     <EditText
         android:id="@+id/event_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/event_name"
-        android:layout_marginTop="10dp"
+        android:hint="Event Address"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="Event Address" />
+        android:layout_below="@id/addresss"
+        />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date:"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/event_address"
+        android:id="@+id/dateee"
+        />
 
     <EditText
         android:id="@+id/event_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/event_address"
+        android:layout_below="@id/dateee"
         android:clickable="true"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
         android:hint="@string/EventDate"/>
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Time:"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/event_date"
+        android:id="@+id/startt"
         />
 
     <EditText
         android:id="@+id/event_start_time"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginTop="10dp"
         android:inputType="time"
-
         android:hint="Event Start Time"
-        android:layout_below="@id/event_date"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/startt"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Time:"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/event_start_time"
+        android:id="@+id/endd"
+        />
 
     <EditText
         android:id="@+id/event_end_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:ems="10"
         android:inputType="time"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:hint="Event End Time"
-        android:layout_below="@id/event_start_time"/>
+        android:layout_below="@id/endd"/>
 
 
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Guest List"
         android:id="@+id/guestTextView"
@@ -104,6 +140,17 @@
         android:layout_marginRight="10dp"
         android:drawableLeft="@drawable/ic_people_black_24dp"
         />
+
+    <ImageView
+        android:id="@+id/gps"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/event_end_time"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/guestTextView"
+
+        android:src="@drawable/gps" />
+
     <TextView
         android:id="@+id/guest_spinner"
         android:layout_width="wrap_content"
@@ -124,40 +171,10 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/guestTextView"
         android:layout_marginTop="40dp"
-        android:text="Create Event"
+        android:text="Update Event"
         android:background="@color/colorPrimary"
+
 
         />
 
 </RelativeLayout>
-
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="50dp"
-            android:layout_height="?attr/actionBarSize"/>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="false"
-        app:headerLayout="@layout/layout_header_drawer"
-        app:menu="@menu/menu_navigation"
-        app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/white"/>
-</androidx.drawerlayout.widget.DrawerLayout>

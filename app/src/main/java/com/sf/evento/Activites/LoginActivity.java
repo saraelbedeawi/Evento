@@ -82,6 +82,12 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 }
+                else if (full_name.getText().toString().trim().isEmpty())
+                {
+                    full_name.setError("Please fill the field");
+                    full_name.requestFocus();
+                    return;
+                }
                 else {
                     fileUploader().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override

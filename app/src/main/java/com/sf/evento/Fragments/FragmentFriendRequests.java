@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class FragmentFriendRequests extends Fragment
     private FirebaseFirestore db;
     private FirebaseUser user;
     private RecyclerView recyclerView;
+    TextView checking;
 
     public FragmentFriendRequests() {
     }
@@ -45,6 +47,8 @@ public class FragmentFriendRequests extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.friend_request_fragment,container,false);
+        checking= view.findViewById(R.id.checking);
+
         db = FirebaseFirestore.getInstance();
         recyclerView=view.findViewById(R.id.RequestsRecycler);
         CollectionReference Requesets = db.collection("FriendRequests");
@@ -64,9 +68,8 @@ public class FragmentFriendRequests extends Fragment
                             }
                             else
                             {
-                                Toast.makeText(
-                                        getActivity().getApplicationContext(), "No Friend Requests", Toast.LENGTH_LONG
-                                ).show();
+                                checking.setVisibility(View.VISIBLE);
+
                             }
                         }
                         else {

@@ -23,6 +23,7 @@
             android:layout_height="180dp"
             android:scaleType="centerCrop"
             android:id="@+id/profileImage"
+             android:src="@drawable/profile"
         />
         <TextView
             android:layout_width="match_parent"
@@ -43,7 +44,7 @@
             android:layout_below="@id/name"
             android:textColor="#000"
             android:textSize="18dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:text="Mobile">
         </TextView>
@@ -68,6 +69,8 @@
                 android:id="@+id/removeButton"
                 android:background="@color/colorAccent"
                 android:textColor="#FFF"
+                android:drawableLeft="@drawable/deletee"
+
                 >
             </Button>
         </RelativeLayout>

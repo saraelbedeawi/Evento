@@ -21,12 +21,15 @@
 
         <ImageView
             android:id="@+id/gps"
-            android:layout_width="62dp"
-            android:layout_height="38dp"
-            android:layout_marginLeft="27dp"
-            android:layout_toRightOf="@id/event_name"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/event_start_time"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="17dp"
+            android:layout_toRightOf="@id/viewGuests"
             android:onClick="showLocation"
             android:src="@drawable/gps" />
+
         <TextView
             android:id="@+id/event_name"
             android:layout_width="275dp"
@@ -83,46 +86,43 @@
             android:layout_marginLeft="20dp"/>
 
 
-        <RelativeLayout
-            android:id="@+id/acceptButtonLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/edit_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="153dp"
+            android:layout_toRightOf="@id/viewGuests"
+            android:src="@drawable/pen" />
+
+        <ImageView
+            android:id="@+id/share_button"
+            android:layout_width="37dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/event_name"
+            android:src="@drawable/share" />
+
+        <ImageView
+            android:id="@+id/trash_button"
+            android:layout_width="35dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/edit_button"
+            android:src="@drawable/delete" />
+
+        <Button
+            android:id="@+id/viewGuests"
             android:layout_below="@id/event_start_time"
-            android:layout_marginTop="10dp"
-
-            >
-
-
-            <ImageView
-                android:id="@+id/edit_button"
-                android:layout_width="61dp"
-                android:layout_height="55dp"
-                android:src="@drawable/xx"
-                />
-
-            <ImageView
-                android:id="@+id/trash_button"
-                android:layout_width="61dp"
-                android:layout_height="60dp"
-                android:src="@drawable/trash"
-                android:layout_toRightOf="@id/edit_button"
-                />
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/colorPrimary"
+            android:text="View Guests"
+            android:textColor="#FFF" />
 
 
-
-            <Button
-                android:id="@+id/rejectButton"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="88dp"
-                android:layout_marginTop="8dp"
-                android:layout_toRightOf="@+id/trash_button"
-
-                android:background="@color/colorAccent"
-                android:text="View Guests"
-                android:textColor="#FFF" />
-
-        </RelativeLayout>
 
 
 

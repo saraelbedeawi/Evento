@@ -1,5 +1,6 @@
 package com.sf.evento.Fragments;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -81,6 +83,8 @@ public class fragmentAddFriends extends Fragment
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 fragmentAddFriends.this.clearButtons();
 
                 EditText number = view.findViewById(R.id.phone);
@@ -103,6 +107,15 @@ public class fragmentAddFriends extends Fragment
                 profileCardLayout.setVisibility(view.GONE);
                 addButtonLayout.setVisibility(view.GONE);
                 clearButtons();
+                Toast toast = Toast.makeText(
+                        getActivity().getApplicationContext(), "Request Sent Successfully.", Toast.LENGTH_LONG
+                );
+                // Set the Toast display position profileCardLayout center
+                toast.setGravity(Gravity.CENTER,0,0);
+                // Finally, show the toast
+                toast.show();
+
+
             }
         });
         acceptButton.setOnClickListener(new View.OnClickListener() {
@@ -179,18 +192,20 @@ public class fragmentAddFriends extends Fragment
                                 String image =(String) ds.get("profilePicture");
 
                                 name.setText(Name);
-                                mStorageRef.child(Uri.parse(image).getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        // Got the download URL for 'users/me/profile.png'
-                                        Picasso.get().load(uri).into(profileImage);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception exception) {
-                                        // Handle any errors
-                                    }
-                                });
+                                if(image!=null) {
+                                    mStorageRef.child(Uri.parse(image).getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            // Got the download URL for 'users/me/profile.png'
+                                            Picasso.get().load(uri).into(profileImage);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception exception) {
+                                            // Handle any errors
+                                        }
+                                    });
+                                }
 
                                 profileCardLayout.setVisibility(View.VISIBLE);
                                 profileCardLayout.setTag(ds);
@@ -301,18 +316,20 @@ public class fragmentAddFriends extends Fragment
                             String image =(String) ds.get("profilePicture");
 
                             name.setText(Name);
-                            mStorageRef.child(Uri.parse(image).getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    // Got the download URL for 'users/me/profile.png'
-                                    Picasso.get().load(uri).into(profileImage);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception exception) {
-                                    // Handle any errors
-                                }
-                            });
+                            if(image!=null) {
+                                mStorageRef.child(Uri.parse(image).getLastPathSegment()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        // Got the download URL for 'users/me/profile.png'
+                                        Picasso.get().load(uri).into(profileImage);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception exception) {
+                                        // Handle any errors
+                                    }
+                                });
+                            }
 
                             profileCardLayout.setVisibility(View.VISIBLE);
                             profileCardLayout.setVisibility(View.VISIBLE);

@@ -1,70 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activites.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <ImageView
-        android:id="@+id/create_event"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/my_events"
-        app:layout_constraintEnd_toStartOf="@+id/my_invitations"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/create_event" />
-
-    <ImageView
-        android:id="@+id/my_invitations"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/friends"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/create_event"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/events" />
-
-    <ImageView
-        android:id="@+id/my_events"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/friends"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/create_event"
-        app:layout_constraintBottom_toTopOf="@id/my_profile"
-        app:srcCompat="@drawable/my_events" />
-
-    <ImageView
-        android:id="@+id/friends"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_invitations"
-        app:layout_constraintBottom_toTopOf="@id/logout"
-        app:layout_constraintStart_toEndOf="@id/my_events"
-        app:srcCompat="@drawable/friends" />
-
-    <ImageView
-        android:id="@+id/my_profile"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_events"
-        app:srcCompat="@drawable/user" />
-
-    <ImageView
-        android:id="@+id/logout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/my_profile"
-        app:layout_constraintTop_toBottomOf="@id/friends"
-        app:srcCompat="@drawable/logout" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activites.MyEvents"
+        android:orientation="vertical"
+        >
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            android:id="@+id/tabellayout_id"
+            app:tabTextColor="@color/tabtextcolor"
+            app:tabIndicatorColor="@color/tabindicatorcolor"
+            android:background="@color/colorPrimary"/>
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewpager_id"/>
+
+
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="50dp"
+            android:layout_height="?attr/actionBarSize"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="false"
+        app:headerLayout="@layout/layout_header_drawer"
+        app:menu="@menu/menu_navigation"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/white"/>
+</androidx.drawerlayout.widget.DrawerLayout>

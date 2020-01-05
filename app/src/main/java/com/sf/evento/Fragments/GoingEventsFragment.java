@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class GoingEventsFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseUser user;
     private RecyclerView recyclerView;
-
+    TextView checking;
     public GoingEventsFragment() {
         // Required empty public constructor
     }
@@ -53,6 +54,8 @@ public class GoingEventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         view=inflater.inflate(R.layout.fragment_going_events,container,false);
+        checking= view.findViewById(R.id.checking);
+
         db = FirebaseFirestore.getInstance();
         recyclerView=view.findViewById(R.id.GoingEventsRecycler);
         CollectionReference Requesets = db.collection("eventsRequests");
@@ -72,10 +75,8 @@ public class GoingEventsFragment extends Fragment {
                             }
                             else
                             {
-                                Toast.makeText(
-                                        getActivity().getApplicationContext(), "No Events", Toast.LENGTH_LONG
-                                ).show();
-                            }
+                                checking.setVisibility(View.VISIBLE);
+                        }
                         }
                         else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
